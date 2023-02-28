@@ -4,7 +4,7 @@ bash script to create a WP environment with the correct protections.
 
 first do:
 
-dnf  --assumeyes  install git
+dnf  --assumeyes  install git  ;
 
 git clone https://github.com/edwardsmarkf/selinux-wordpress/selinux-wordpress.bsh ;
 
