@@ -6,7 +6,7 @@ first do:
 
 log in as root
 
-dnf  --assumeyes  install git  ;
+/usr/bin/dnf  --assumeyes  install git  ;
 
 git clone https://github.com/edwardsmarkf/selinux-wordpress/selinux-wordpress.bsh ;
 
