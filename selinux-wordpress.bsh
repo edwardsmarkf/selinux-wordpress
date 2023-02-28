@@ -1,0 +1,89 @@
+#! /bin/bash  -w
+#
+#
+##   2023-02-28
+##   apparently when SELinux was introduced, it caused serious WP installation issues.  these steps get around that without
+##   resorting to setting  /etc/selinux/config  "SELINUX=permissive"
+
+## written mostly from:  https://www.tecmint.com/install-wordpress-rhel-apache/
+
+dnf  --assumeyes  update ;
+
+dnf  --assumeyes  install  mariadb-server  ;
+dnf  --assumeyes  install  httpd    ;
+
+    ## php 7.4 installation
+
+dnf  --assumeyes  install  http://rpms.remirepo.net/enterprise/remi-release-8.rpm  ;
+dnf  --assumeyes  module reset php               ;
+dnf  --assumeyes  module enable php:remi-7.4     ;
+
+dnf --assumeyes   install  php-fpm      \
+                           php-cli      \
+                           php-common   \
+                           php-zip      \
+                           php-gd       \
+                           php-mcrypt   \
+                           php-mbstring \
+                           php-curl     \
+                           php-xml      \
+                           php-pear     \
+                           php-bcmath   \
+                           php-json     \
+                           php-pdo      \
+                           php-mysql    \
+                           ;
+
+
+
+systemctl  enable  --now mariadb.service   ;  ## --now is a new feature that MIGHT not work!
+systemctl  start   mariadb.service        ;
+
+systemctl  enable  --now  httpd.service      ;
+systemctl  start   httpd.service          ;
+
+systemctl enable --now php-fpm.service     ;
+systemctl start php-fpm.service            ;
+
+
+mysql --verbose  <<END ;
+    CREATE DATABASE \`wpDb\`;
+    GRANT ALL ON \`wpDb\`.* TO 'wpUser'@'localhost' IDENTIFIED BY 'wpPassword';
+    FLUSH PRIVILEGES;
+END
+
+# to test:
+mysql   --user=wpUser  --password=wpPassword  wpDb <<END;
+SHOW databases;
+SELECT VERSION();
+exit
+END
+
+
+cd  /var/www/html ;
+
+firewall-cmd --zone=public --permanent --add-service=http   ;
+firewall-cmd --reload                                       ;
+
+echo '<?php phpinfo(); ?>' > phpinfo.php ;   ## visit  http://IP#/phpinfo.php   to test
+
+
+wget   https://wordpress.org/latest.zip ;
+unzip  /var/www/html/latest.zip ; 
+
+mv    --verbose  ./wordpress/*   /var/www/html/ ;
+rmdir --verbose  ./wordpress    ;
+
+/usr/bin/chown  --recursive --verbose apache:apache /var/www/html/           ;   ## omitted wordpress
+/usr/bin/chcon  --recursive --verbose --type=httpd_sys_rw_content_t /var/www/html/  ;
+
+find /var/www/html -type d -exec chmod --verbose 755 {} \;    ;
+find /var/www/html -type f -exec chmod --verbose 644 {} \;    ;
+
+/usr/sbin/semanage fcontext --add --type httpd_sys_rw_content_t "/var/www/html(/.*)?"  ; 
+/usr/sbin/restorecon -R -v  /var/www/html/   ;
+
+echo "rebooting - be sure to go to http:/###.###.###.###/ and install wordpress!" ;
+/usr/sbin/shutdown  --reboot  now ;
+
+exit;   ## if this is even necessary ??
