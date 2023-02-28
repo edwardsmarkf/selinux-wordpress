@@ -8,5 +8,8 @@ log in as root
 
 /usr/bin/dnf  --assumeyes  install git  ;
 
-git clone https://github.com/edwardsmarkf/selinux-wordpress/selinux-wordpress.bsh ;
+cd ~ ;
 
+git clone https://github.com/edwardsmarkf/selinux-wordpress/  ;
+
+bash -vx  ./selinux-wordpress/selinux-wordpress.bsh  ;
