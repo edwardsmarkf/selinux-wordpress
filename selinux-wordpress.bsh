@@ -67,9 +67,9 @@ firewall-cmd --reload                                       ;
 
 echo '<?php phpinfo(); ?>' > phpinfo.php ;   ## visit  http://IP#/phpinfo.php   to test
 
-
-wget   https://wordpress.org/latest.zip ;
-unzip  /var/www/html/latest.zip ; 
+dnf  --assumeyes   install wget             ;
+wget   https://wordpress.org/latest.zip     ;
+unzip  /var/www/html/latest.zip             ; 
 
 mv    --verbose  ./wordpress/*   /var/www/html/ ;
 rmdir --verbose  ./wordpress    ;
