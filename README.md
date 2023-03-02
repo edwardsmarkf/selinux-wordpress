@@ -22,3 +22,11 @@ sed --in-place  --expression='s/^upload_max_filesize = 2M/;;;;&|upload_max_files
 
 systemctl reload php-fpm.service  ;   ######   
 
+
+also this needs to be 'adjusted' when the IP number changes yet again:
+
+mysql   --user=wpUser  --password=wpPassword  wpDb <<END;
+    UPDATE  wp_options SET option_value = 'http://192.168.123.163'  WHERE option_name IN('siteurl','home');
+END
+
+
