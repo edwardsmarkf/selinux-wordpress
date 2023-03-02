@@ -18,7 +18,7 @@ tail -f   ~/selinux-wordpress.bsh.log   ;
 
 also required:  (can be done after reboot
 
-sed --in-place  --expression='s/^upload_max_filesize = 2M/;;;;&|upload_max_filesize = 512M/; s/^post_max_size = 8M/;;;;&|post_max_size = 512M/; '  /etc/php.ini ;
+sed --in-place  --expression='s/^upload_max_filesize = 2M/;;;;&\nupload_max_filesize = 512M/; s/^post_max_size = 8M/;;;;&\npost_max_size = 512M/; '  /etc/php.ini ;
 
 systemctl reload php-fpm.service  ;   ######   
 
