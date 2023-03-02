@@ -7,6 +7,10 @@
 
 ## written mostly from:  https://www.tecmint.com/install-wordpress-rhel-apache/
 
+
+firewall-cmd --zone=public --permanent --add-service=http   ;
+firewall-cmd --reload                                       ;
+
 dnf  --assumeyes  update ;
 
 dnf  --assumeyes  install  mariadb-server  ;
@@ -62,10 +66,7 @@ END
 
 cd  /var/www/html ;
 
-firewall-cmd --zone=public --permanent --add-service=http   ;
-firewall-cmd --reload                                       ;
-
-echo '<?php phpinfo(); ?>' > phpinfo.php ;   ## visit  http://IP#/phpinfo.php   to test
+echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php ;   ## visit  http://IP#/phpinfo.php   to test
 
 dnf  --assumeyes   install wget             ;
 wget   https://wordpress.org/latest.zip     ;
