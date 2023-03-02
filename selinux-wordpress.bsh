@@ -13,6 +13,10 @@ firewall-cmd --reload                                       ;
 
 dnf  --assumeyes  update ;
 
+  ## misc dnf's
+dnf  --assumeyes   install wget             ;
+dnf  --assumeyes   install unzip            ;
+
 dnf  --assumeyes  install  mariadb-server  ;
 dnf  --assumeyes  install  httpd    ;
 
