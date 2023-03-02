@@ -19,6 +19,7 @@ tail -f   ~/selinux-wordpress.bsh.log   ;
 also required:  (can be done after reboot
 
 sed --in-place --file=- /etc/php.ini << END;
+
 s/^upload_max_filesize = 2M/;;;;&\nupload_max_filesize = 512M/; s/^post_max_size = 8M/;;;;&\npost_max_size = 512M/;
 END
 
