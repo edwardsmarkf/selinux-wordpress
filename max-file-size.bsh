@@ -1,0 +1,30 @@
+#!  /bin/bash  -w
+
+sed --in-place --file=- /etc/php.ini << END;
+    s/^upload_max_filesize = 2M/;;;;&\nupload_max_filesize = 512M/; s/^post_max_size = 8M/;;;;&\npost_max_size = 512M/;
+END
+
+systemctl reload php-fpm.service ; ######
+
+
+sed --in-place --file=-  /var/www/html/wp-config.php << END;
+/\/\* Add any custom values between this line and the "stop editing" line. \*\//a\
+ini_set( 'upload_max_filesize' , '512M' );\n\
+define( 'WP_DEBUG', true );\n\
+define( 'WP_DEBUG_LOG', true );\n\
+define( 'WP_DEBUG_DISPLAY', true );\n\
+
+END
+
+exit;
+
+
+
+
+add these to /var/www/html/wp-config.php (near the bottom)
+
+ini_set( 'upload_max_filesize' , '512M' );
+
+// Enable WP_DEBUG mode 
+
+define( 'WP_DEBUG', true ); // Enable Debug logging to the /wp-content/debug.log file define( 'WP_DEBUG_LOG', true ); define( 'WP_DEBUG_DISPLAY', true );
