@@ -72,7 +72,7 @@ cd  /var/www/html ;
 
 echo '<?php phpinfo(); ?>' > /var/www/html/phpinfo.php ;   ## visit  http://IP#/phpinfo.php   to test
 
-dnf  --assumeyes   install wget             ;
+
 wget   https://wordpress.org/latest.zip     ;
 unzip  /var/www/html/latest.zip             ; 
 
