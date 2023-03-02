@@ -1,6 +1,6 @@
 #! /bin/bash  -w
 #
-##    possible future improvement:   check every command afterward    echo $?
+##    possible future improvement:   check every command afterward   
 
 ##   2023-02-28
 ##   apparently when SELinux was introduced, it caused serious WP installation issues.  these steps get around that without
@@ -96,7 +96,9 @@ find /var/www/html -type d -exec chmod --verbose 755 {} \;    ;
 find /var/www/html -type f -exec chmod --verbose 644 {} \;    ;
 
 /usr/sbin/semanage fcontext --add --type httpd_sys_rw_content_t "/var/www/html(/.*)?"  ; 
+echo $?                      ;
 /usr/sbin/restorecon -R -v  /var/www/html/   ;
+echo $?                                          ;
 
 echo "rebooting - be sure to go to http:/###.###.###.###/ and install wordpress!" ;
 /usr/sbin/shutdown  --reboot  now ;
