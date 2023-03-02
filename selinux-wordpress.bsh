@@ -9,8 +9,6 @@
 ## written mostly from:  https://www.tecmint.com/install-wordpress-rhel-apache/
 
 
-firewall-cmd --zone=public --permanent --add-service=http   ;
-firewall-cmd --reload                                       ;
 
 dnf  --assumeyes  update ;
 
@@ -94,6 +92,11 @@ rmdir --verbose  ./wordpress    ;
 
 find /var/www/html -type d -exec chmod --verbose 755 {} \;    ;
 find /var/www/html -type f -exec chmod --verbose 644 {} \;    ;
+
+
+firewall-cmd --zone=public --permanent --add-service=http   ;
+firewall-cmd --reload                                       ;
+
 
 /usr/sbin/semanage fcontext --add --type httpd_sys_rw_content_t "/var/www/html(/.*)?"  ; 
 echo $?                      ;
