@@ -13,12 +13,21 @@ firewall-cmd --reload                                       ;
 
 dnf  --assumeyes  update ;
 
+##  install semanage utilities (for SElinux)
+##                 https://www.cyberciti.biz/faq/redhat-install-semanage-selinux-command-rpm/
+
+dnf  whatprovides /usr/sbin/semanage              ;
+dnf      provides /usr/sbin/semanage              ;  ## same thing!
+dnf  --assumeyes  install policycoreutils-python  ;
+
+
   ## misc dnf's
 dnf  --assumeyes   install wget             ;
 dnf  --assumeyes   install unzip            ;
 
 dnf  --assumeyes  install  mariadb-server  ;
 dnf  --assumeyes  install  httpd    ;
+
 
     ## php 7.4 installation
 
