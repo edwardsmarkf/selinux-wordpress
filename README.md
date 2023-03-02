@@ -16,7 +16,9 @@ bash -vx  ./selinux-wordpress/selinux-wordpress.bsh  > ~/selinux-wordpress.bsh.l
 
 tail -f   ~/selinux-wordpress.bsh.log   ;
 
-also required:  (can be done after reboot
+
+
+also required:  (can be done after reboot)
 
 sed --in-place --file=- /etc/php.ini << END;
 
@@ -25,6 +27,17 @@ sed --in-place --file=- /etc/php.ini << END;
 END
 
 systemctl reload php-fpm.service  ;   ######   
+
+add these to /var/www/html/wp-config.php (near the bottom)
+
+ini_set( 'upload_max_filesize' , '512M' );
+
+// Enable WP_DEBUG mode
+define( 'WP_DEBUG', true );
+// Enable Debug logging to the /wp-content/debug.log file
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', true );
+
 
 
 also this needs to be 'adjusted' when the IP number changes yet again:
