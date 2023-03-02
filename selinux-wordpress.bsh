@@ -99,9 +99,12 @@ firewall-cmd --reload                                       ;
 
 
 /usr/sbin/semanage fcontext --add --type httpd_sys_rw_content_t "/var/www/html(/.*)?"  ; 
-echo $?                      ;
-/usr/sbin/restorecon -R -v  /var/www/html/   ;
-echo $?                                          ;
+echo $?                                                   ;
+/usr/sbin/restorecon -R -v  /var/www/html/                ;
+echo $?                                                   ;
+/usr/sbin/setsebool -P httpd_can_network_connect 1        ;  
+echo $?                                                   ;
+
 
 echo "rebooting - be sure to go to http:/###.###.###.###/ and install wordpress!" ;
 /usr/sbin/shutdown  --reboot  now ;
