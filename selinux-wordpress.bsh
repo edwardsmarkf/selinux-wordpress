@@ -16,9 +16,9 @@ dnf  --assumeyes  update ;
 ##  install semanage utilities (for SElinux)
 ##                 https://www.cyberciti.biz/faq/redhat-install-semanage-selinux-command-rpm/
 
-dnf  whatprovides /usr/sbin/semanage              ;
-dnf      provides /usr/sbin/semanage              ;  ## same thing!
-dnf  --assumeyes  install policycoreutils-python  ;
+dnf  whatprovides /usr/sbin/semanage                    ;
+dnf      provides /usr/sbin/semanage                    ;  ## same thing!
+dnf  --assumeyes  install policycoreutils-python-utils  ;
 
 
   ## misc dnf's
