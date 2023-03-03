@@ -29,9 +29,9 @@ also this needs to be 'adjusted' when the IP number changes yet again:
 
 mysql   --user=wpUser  --password=wpPassword  wpDb <<END;
 
-    SELECT option_value FROM wp_options WHERE option_name IN('siteurl','home');
+  SELECT option_value FROM wp_options WHERE option_name IN('siteurl','home');
 
-    UPDATE  wp_options SET option_value = 'http://192.168.123.163'  WHERE option_name IN('siteurl','home');
+  UPDATE  wp_options SET option_value = 'http://192.168.123.163'  WHERE option_name IN('siteurl','home');
 END
 
 
