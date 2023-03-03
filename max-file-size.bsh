@@ -1,8 +1,8 @@
 #!  /bin/bash  -w
 
 sed --in-place --file=- /etc/php.ini << END;
-    s/^upload_max_filesize = 2M/;;;;&\nupload_max_filesize = 512M/;
-    s/^post_max_size = 8M/;;;;&\npost_max_size = 512M/;
+    s/^upload_max_filesize = 2M/;;;;& -- $0\nupload_max_filesize = 512M/;
+    s/^post_max_size = 8M/;;;;& -- $0\npost_max_size = 512M/;
 END
 
 systemctl reload php-fpm.service ; ######
@@ -11,12 +11,12 @@ echo 'we may need the ones from below also added to above!' ;
 
 sed --in-place --file=-  /var/www/html/wp-config.php << END;
 /\/\* Add any custom values between this line and the "stop editing" line. \*\//a\
-ini_set( 'upload_max_filesize' , '512M' );\n\
+ini_set( 'upload_max_filesize' , '512M' ); // $0\n\
     #### @ini_set( ‘post_max_size’, ‘512M’);\n\
     #### @ini_set( ‘memory_limit’, ‘512M’ );\n\
     #### @ini_set( ‘max_execution_time’, ‘300’ );\n\
     #### @ini_set( ‘max_input_time’, ‘300’ );\n\
-define( 'WP_DEBUG', true );\n\
+define( 'WP_DEBUG', true ); // $0\n\
 define( 'WP_DEBUG_LOG', true );\n\
 define( 'WP_DEBUG_DISPLAY', true );\n\
 
@@ -27,7 +27,7 @@ END
     
 cat >> /etc/httpd/conf/httpd.conf  <<END ;
 
-### added by selinux-wordress-init.bsh script 
+### added by $0 script 
 Timeout 600
 ProxyTimeout 600
 END
