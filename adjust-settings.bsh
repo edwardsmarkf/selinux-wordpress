@@ -5,6 +5,11 @@ sed --in-place --file=- /etc/php.ini << END;   ## note double quotes for bash su
     s/^post_max_size = 8M/;;;;& -- changed by $0\npost_max_size = 512M/;
 END
 
+#sed --in-place --file=- /etc/php.ini << END;   ## note double quotes for bash substitution
+#    s/^upload_max_filesize = 2M/;;;;& -- changed by $0\nupload_max_filesize = 512M/;
+#    s/^post_max_size = 8M/;;;;& -- changed by $0\npost_max_size = 512M/;
+#END
+
 systemctl reload php-fpm.service ; ######
 
 echo 'we may need the ones from below also added to above!' ;
