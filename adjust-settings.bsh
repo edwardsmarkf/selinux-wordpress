@@ -5,10 +5,7 @@ sed --in-place --file=- /etc/php.ini << END;   ## note double quotes for bash su
     s/^post_max_size = 8M/;;;;& -- changed by $(basename ${0};)\npost_max_size = 512M/;
 END
 
-#sed --in-place --file=- /etc/php.ini << END;   ## note double quotes for bash substitution
-#    s/^upload_max_filesize = 2M/;;;;& -- changed by $0\nupload_max_filesize = 512M/;
-#    s/^post_max_size = 8M/;;;;& -- changed by $0\npost_max_size = 512M/;
-#END
+
 
 systemctl reload php-fpm.service ; ######
 
@@ -17,10 +14,10 @@ echo 'we may need the ones from below also added to above!' ;
 sed --in-place --file=-  /var/www/html/wp-config.php << END;
 /\/\* Add any custom values between this line and the "stop editing" line. \*\//a\
 ini_set( 'upload_max_filesize' , '512M' );   // Added by $0\n\
-    #### @ini_set( ‘post_max_size’, ‘512M’);\n\
-    #### @ini_set( ‘memory_limit’, ‘512M’ );\n\
-    #### @ini_set( ‘max_execution_time’, ‘300’ );\n\
-    #### @ini_set( ‘max_input_time’, ‘300’ );\n\
+ini_set( 'post_max_size', '512M');\n\
+ini_set( 'memory_limit', '512M' );\n\
+ini_set( 'max_execution_time', '300' );\n\
+ini_set( 'max_input_time', '300' );\n\
 define( 'WP_DEBUG', true );     // Added by $0\n\
 define( 'WP_DEBUG_LOG', true );      // Added by $0\n\
 define( 'WP_DEBUG_DISPLAY', true );    // Added by $0\n\
