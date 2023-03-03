@@ -12,9 +12,9 @@ cd ~ ;
 
 git clone https://github.com/edwardsmarkf/selinux-wordpress/  ;
 
-bash -vx  ./selinux-wordpress/selinux-wordpress-init.bsh  > ~/selinux-wordpress.bsh-init.log  2>&1  &
+bash -vx  ./selinux-wordpress/selinux-wordpress-init.bsh  > ~/selinux-wordpress-init.bsh.log  2>&1  &
 
-tail -f   ~/selinux-wordpress.bsh.log   ;
+tail -f   ~/selinux-wordpress-init.bsh.log   ;
 
 
 
