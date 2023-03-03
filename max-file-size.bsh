@@ -23,6 +23,8 @@ define( 'WP_DEBUG_DISPLAY', true );\n\
 END
 
 
+    ##  https://stackoverflow.com/questions/31975951/proxy-ajperror-70007the-timeout-specified-has-expired
+    
 cat >> /etc/httpd/conf/httpd.conf  <<END ;
 
 ### added by selinux-wordress-init.bsh script 
