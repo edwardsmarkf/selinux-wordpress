@@ -20,7 +20,7 @@ tail -f   ~/selinux-wordpress-init.bsh.log   ;
 
 also required:  (can be done after reboot)
 
-bash -vx  ./selinux-wordpress/max-file-size.bsh  > ~/max-file-size.bsh.log  2>&1  &
+bash -vx  ./selinux-wordpress/adjust-settings.bsh  > ~/adjust-settings.bsh.log  2>&1  ;
 
 
 
