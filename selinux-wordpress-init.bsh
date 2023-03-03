@@ -62,6 +62,14 @@ systemctl enable --now php-fpm.service     ;
 systemctl start php-fpm.service            ;
 
 
+cat >> /etc/httpd/conf/httpd.conf  <<END ;
+
+### added by selinux-wordress-init.bsh script 
+Timeout 600
+ProxyTimeout 600
+END
+
+
 mysql --verbose  <<END ;
     CREATE DATABASE \`wpDb\`;
     GRANT ALL ON \`wpDb\`.* TO 'wpUser'@'localhost' IDENTIFIED BY 'wpPassword';
