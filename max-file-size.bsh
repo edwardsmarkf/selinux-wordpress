@@ -22,6 +22,16 @@ define( 'WP_DEBUG_DISPLAY', true );\n\
 
 END
 
+
+cat >> /etc/httpd/conf/httpd.conf  <<END ;
+
+### added by selinux-wordress-init.bsh script 
+Timeout 600
+ProxyTimeout 600
+END
+
+systemctl restart  httpd.service ;
+
 exit;
 
 
