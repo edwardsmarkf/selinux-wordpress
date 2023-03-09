@@ -90,6 +90,7 @@ rmdir --verbose  ./wordpress    ;
 
 /usr/bin/chown  --recursive --verbose apache:apache /var/www/html/           ;   ## omitted wordpress
 /usr/bin/chcon  --recursive --verbose --type=httpd_sys_rw_content_t /var/www/html/  ;
+ls -l --context  /var/www/html/    ;    ##  -Z is same as --context, this step is optional.
 
 find /var/www/html -type d -exec chmod --verbose 755 {} \;    ;
 find /var/www/html -type f -exec chmod --verbose 644 {} \;    ;
