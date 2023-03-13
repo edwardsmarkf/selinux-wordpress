@@ -109,6 +109,6 @@ echo $?                                                   ;
 
 
 echo "rebooting - be sure to go to http:/###.###.###.###/ and install wordpress!" ;
-/usr/sbin/shutdown  --reboot  now ;
+echo "reboot using /usr/sbin/shutdown  --reboot  now ";
 
 exit;   ## if this is even necessary ??
