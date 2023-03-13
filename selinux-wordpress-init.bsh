@@ -109,6 +109,7 @@ echo $?                                                   ;
 
 
 echo "rebooting - be sure to go to http:/###.###.###.###/ and install wordpress!" ;
-echo "reboot using /usr/sbin/shutdown  --reboot  now ";
+history -a  ;   ## save all history before reboot
+/usr/sbin/shutdown  --reboot  now ;
 
 exit;   ## if this is even necessary ??
