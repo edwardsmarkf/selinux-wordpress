@@ -29,6 +29,7 @@ dnf  --assumeyes  install  httpd    ;
 
 
     ## php 7.4 installation
+      ##  https://linuxize.com/post/how-to-install-php-on-centos-8/
 
 dnf  --assumeyes  install  http://rpms.remirepo.net/enterprise/remi-release-8.rpm  ;
 dnf  --assumeyes  module reset php               ;
